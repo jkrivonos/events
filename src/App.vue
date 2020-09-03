@@ -1,5 +1,7 @@
 <template>
   <v-app>
+    <v-system-bar color="deep-purple darken-3"></v-system-bar>
+
     <v-app-bar
       app
       color="#5c6bc0"
@@ -14,6 +16,9 @@
           width="40"
         />
       </div>
+      <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+
+      <v-toolbar-title/>
       <v-spacer></v-spacer>
 
       <v-btn
@@ -25,9 +30,40 @@
         <v-icon>+</v-icon>
       </v-btn>
     </v-app-bar>
+    <v-navigation-drawer
+      v-model="drawer"
+      absolute
+      bottom
+      temporary
+    >
+      <v-list
+        nav
+        dense
+      >
+        <v-list-item-group
+          v-model="group"
+          active-class="deep-purple--text text--accent-4"
+        >
+          <v-list-item>
+            <router-link :to = "{ name: 'Login' }">
+              <v-list-item-title>
+                Вход пользователя
+              </v-list-item-title>
+            </router-link>
+          </v-list-item>
 
+          <v-list-item>
+            <router-link :to = "{ name: 'Events' }">
+              <v-list-item-title>Список мероприятий</v-list-item-title>
+            </router-link>
+          </v-list-item>
+
+        </v-list-item-group>
+      </v-list>
+    </v-navigation-drawer>
     <v-main>
-      <Add-event/>
+      <router-view></router-view>
+<!--      <Add-event/>-->
     </v-main>
 
     <v-footer
@@ -66,15 +102,17 @@
 </template>
 
 <script>
-import AddEvent from './components/AddEvent';
+// import AddEvent from './views/Events';
 
 export default {
   name: 'App',
 
   components: {
-    AddEvent
+    // AddEvent
   },
   data: () => ({
+    drawer: false,
+    group: null,
     events: [
       {
         name: 'Богатое кубанское мероприятие 1',
