@@ -1,8 +1,11 @@
-import Vue from 'vue'
+import Vue    from 'vue'
 import Router from 'vue-router'
 
-import Events from './views/Events';
-import Login from './views/Login'
+import Events       from './views/Events';
+import Login        from './views/Login'
+import Registration from './views/Registration'
+import AddEvent     from './views/AddEvent'
+import SelectedEvent from './views/SelectedEvent'
 
 Vue.use(Router);
 
@@ -24,17 +27,27 @@ export default new Router({
       name: 'Events',
       component: Events
     },
-    // {
-    //   path: '/addEvent',
-    //   name: 'AddEvent',
-    //   component: AddEvent
-    // },
+    {
+      path: '/events/:id',
+      name: 'SelectedEvent',
+      component: SelectedEvent
+    },
+
+    {
+      path: '/addEvent',
+      name: 'AddEvent',
+      component: AddEvent
+    },
     {
       path: '/login',
       name: 'Login',
       component: Login,
     },
-
+    {
+      path: '/registration',
+      name: 'Registration',
+      component: Registration,
+    },
     //одна категория
     // {
     //   path: '/category/:id',

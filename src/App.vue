@@ -21,14 +21,14 @@
       <v-toolbar-title/>
       <v-spacer></v-spacer>
 
-      <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-        text
-      >
-        <span class="mr-2">Добавить мероприятие</span>
-        <v-icon>+</v-icon>
-      </v-btn>
+        <v-btn
+          to="AddEvent"
+          target="_blank"
+          text
+        >
+          <span class="mr-2">Добавить мероприятие</span>
+          <v-icon>+</v-icon>
+        </v-btn>
     </v-app-bar>
     <v-navigation-drawer
       v-model="drawer"
@@ -45,9 +45,16 @@
           active-class="deep-purple--text text--accent-4"
         >
           <v-list-item>
+            <router-link :to = "{ name: 'Registration' }">
+              <v-list-item-title>
+                Регистрация
+              </v-list-item-title>
+            </router-link>
+          </v-list-item>
+          <v-list-item>
             <router-link :to = "{ name: 'Login' }">
               <v-list-item-title>
-                Вход пользователя
+                Вход
               </v-list-item-title>
             </router-link>
           </v-list-item>
@@ -58,12 +65,17 @@
             </router-link>
           </v-list-item>
 
+          <v-list-item>
+            <router-link :to = "{ name: 'AddEvent' }">
+              <v-list-item-title>Добавить мероприятие</v-list-item-title>
+            </router-link>
+          </v-list-item>
+
         </v-list-item-group>
       </v-list>
     </v-navigation-drawer>
     <v-main>
       <router-view></router-view>
-<!--      <Add-event/>-->
     </v-main>
 
     <v-footer
@@ -102,14 +114,9 @@
 </template>
 
 <script>
-// import AddEvent from './views/Events';
 
 export default {
   name: 'App',
-
-  components: {
-    // AddEvent
-  },
   data: () => ({
     drawer: false,
     group: null,
