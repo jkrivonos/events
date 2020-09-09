@@ -1,33 +1,44 @@
 <template>
-  <v-container class="mt-6">
-    <v-card v-for="(job,i) in jobs"
-            :key="i"
-            class="mx-auto"
-            max-width="510"
-            mt-6
-            outlined
-    >
-      <v-card-title>
-        {{ job.shortDescription }}
-      </v-card-title>
-      <v-list-item three-line>
+<v-container>
+  <v-card v-for="(job,i) in jobs"
+          :key="i"
+          class="mx-auto mb-6"
+          color="#26c6da"
+          dark
+          max-width="400"
+  >
+    <v-card-title>
+      <v-icon
+              large
+              left
+      >
+        mdi-twitter
+      </v-icon>
+      <span class="title font-weight-light"> {{ dateTime(job.jobAssignmentTime) }}</span>
+    </v-card-title>
+
+    <v-card-text class="headline font-weight-bold"> {{ job.shortDescription }} </v-card-text>
+
+    <v-card-actions>
+      <v-list-item class="grow">
+        <v-list-item-avatar color="grey darken-3">
+          <v-img
+                  class="elevation-6"
+                  src="https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light"
+          ></v-img>
+        </v-list-item-avatar>
+
         <v-list-item-content>
-          {{ job.assigneeName }}
-        </v-list-item-content>
-        <v-list-item-content>
-          {{ dateTime(job.jobAssignmentTime) }}
-        </v-list-item-content>
-        <v-list-item-content>
-          {{job.id}}
+          <v-list-item-title>{{ job.assigneeName }}</v-list-item-title>
         </v-list-item-content>
       </v-list-item>
-    </v-card>
-  </v-container>
+    </v-card-actions>
+  </v-card>
+</v-container>
 </template>
 
 <script>
-  import {mapActions, mapGetters} from 'vuex';
-  import {getOne} from '@/api/events'
+  import { getOne } from '@/api/events'
   import moment from 'moment'
 
   export default {
@@ -39,12 +50,7 @@
         .then(response => this.jobs = response.jobs)
         .catch(error => console.warn(`Не удалось получить данные по мероприятию с id ${this.$route.params.id}, ${error}`));
     },
-    computed: {
-      ...mapGetters('events', ['selected']),
-
-    },
     methods: {
-      ...mapActions('events', ['getInfo']),
       dateTime(dateTime) {
         return moment(dateTime, 'YYYY-MM-DD').format('DD.MM.YYYY HH-MM')
       }

@@ -8,14 +8,10 @@ export default {
   },
   getters: {
     all: state => state.events,
-    selected: state => state.selectedEvent
   },
   mutations: {
     setEvents(state, events) {
       state.events = events
-    },
-    setSelectedEvent(state, event) {
-      state.selectedEvent = event
     }
   },
   actions: {
@@ -23,9 +19,8 @@ export default {
       let response = await eventsApi.all()
       commit('setEvents', response.events)
     },
-    getInfo({ getters, commit }, id) {
-      let event = getters.all.find(el => el.id === id);
-      commit('setSelectedEvent', event)
+    addEvent() {
+
     }
   }
 }

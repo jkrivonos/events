@@ -11,3 +11,24 @@ export async function getOne(eventId) {
   return data;
 
 }
+
+export async function getControl() {
+  let { data } = await server.get(`http://localhost:8081/ecs/events/to-control?start=1&limit=4`);
+  return data;
+
+}
+
+export async function add(event) {
+  console.log('event', event);
+  let { data } = await server.post(`http://localhost:8081/ecs/event`, {
+    event
+  });
+  return data;
+}
+
+export async function change(token, id, count){
+  let { data } = await server.put('cart.php', { token, id, cnt: count }, {
+    errorSuppression: { text: 'при изменении количества товара', exclude: [ 422 ] }
+  })
+  return data;
+}

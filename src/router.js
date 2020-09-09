@@ -1,21 +1,24 @@
 import Vue    from 'vue'
 import Router from 'vue-router'
 
-import Events       from './views/Events';
-import Login        from './views/Login'
-import Registration from './views/Registration'
-import AddEvent     from './views/AddEvent'
+
+import Home          from './views/Home'
+import Events        from './views/Events';
+import Login         from './views/Login'
+import Registration  from './views/Registration'
+import AddEvent      from './views/AddEvent'
 import SelectedEvent from './views/SelectedEvent'
+import UnderControl  from './views/UnderControl'
 
 Vue.use(Router);
 
 export default new Router({
   routes: [
-    // {
-    //   path: '/',
-    //   name: 'MainPageCategories',
-    //   component: MainPageCategories,
-    // },
+    {
+      path: '/',
+      name: 'Home',
+      component: Home,
+    },
     // {
     //   path:'/category/:id/sub/:id_subcategory',
     //   name: 'subcategory',
@@ -47,6 +50,11 @@ export default new Router({
       path: '/registration',
       name: 'Registration',
       component: Registration,
+    },
+    {
+      path: '/control',
+      name: 'UnderControl',
+      component: UnderControl,
     },
     //одна категория
     // {

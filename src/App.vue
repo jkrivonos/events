@@ -71,6 +71,12 @@
             </router-link>
           </v-list-item>
 
+          <v-list-item>
+            <router-link :to = "{ name: 'UnderControl' }">
+              <v-list-item-title>Под контролем у текущего пользователя</v-list-item-title>
+            </router-link>
+          </v-list-item>
+
         </v-list-item-group>
       </v-list>
     </v-navigation-drawer>
