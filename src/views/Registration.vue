@@ -40,7 +40,7 @@
                     :disabled="!valid"
                     color="success"
                     class="mr-4 text-decoration-none"
-                    @click="validate"
+                    @click="registration"
             >
               Зарегистрироваться
             </v-btn>
@@ -52,6 +52,8 @@
 </template>
 
 <script>
+  import { registration } from '@/api/login'
+
   export default {
     data: () => ({
       valid: true,
@@ -68,20 +70,20 @@
         'HR',
         'Экономисты',
         'Юристы',
-      ],
-      checkbox: false,
+      ]
     }),
 
     methods: {
       validate() {
-        this.$refs.form.validate()
+        return this.$refs.form.validate()
       },
-      reset() {
-        this.$refs.form.reset()
-      },
-      resetValidation() {
-        this.$refs.form.resetValidation()
-      },
+      registration() {
+        if (this.validate()) {
+          registration()
+            .then(response => console.log(response))
+            .catch(error => console.warn(`Не удалось зарегистрировать пользователя ${error}`))
+        }
+      }
     },
   }
 </script>

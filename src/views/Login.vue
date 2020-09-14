@@ -28,22 +28,21 @@
                   required
           ></v-text-field>
           <v-card-actions>
-              <v-btn
-                      :disabled="!valid"
-                      to="Registration"
-                      color="success"
-                      class="mr-4"
-                      @click="validate"
-              >
-                Зарегистрироваться
-              </v-btn>
             <v-btn
                     :disabled="!valid"
                     color="success"
                     class="mr-4"
-                    @click="validate"
+                    @click="enter"
             >
               Войти
+            </v-btn>
+            <v-btn
+                    :disabled="!valid"
+                    to="Registration"
+                    color="success"
+                    class="mr-4"
+            >
+              Зарегистрироваться
             </v-btn>
           </v-card-actions>
         </v-form>
@@ -54,6 +53,8 @@
 </template>
 
 <script>
+  import { login } from '@/api/login'
+
   export default {
     data: () => ({
       valid: true,
@@ -67,15 +68,16 @@
     }),
 
     methods: {
+      enter() {
+        if (this.validate()) {
+          login()
+            .then(response => console.log(response))
+            .catch(error => console.warn(`Не удалось залогиниться ${error}`))
+        }
+      },
       validate() {
-        this.$refs.form.validate()
-      },
-      reset() {
-        this.$refs.form.reset()
-      },
-      resetValidation() {
-        this.$refs.form.resetValidation()
-      },
+        return this.$refs.form.validate();
+      }
     },
   }
 </script>

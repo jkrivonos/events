@@ -2,6 +2,7 @@
   <v-data-table
           :headers="headers"
           :items="allEvents"
+          @click:row="select($event)"
           sort-by="calories"
           class="elevation-1"
   >
@@ -22,20 +23,18 @@
 
             <v-card-text>
               <v-container>
-                <v-row>
-                  <v-col cols="12" sm="6" md="4">
-                    <v-text-field v-model="editedItem.shortName" label="Название"></v-text-field>
-                  </v-col>
-                  <v-col cols="12" sm="6" md="4">
-                    <v-text-field v-model="editedItem.creatorName" label="Организатор"></v-text-field>
-                  </v-col>
-                  <v-col cols="12" sm="6" md="4">
-                    <v-text-field v-model="editedItem.shortDate" label="Начало события"></v-text-field>
-                  </v-col>
-                  <v-col cols="12" sm="6" md="4">
-                    <v-text-field v-model="editedItem.site" label="Площадка"></v-text-field>
-                  </v-col>
-                </v-row>
+                <v-col>
+                  <v-text-field v-model="editedItem.shortName" label="Название"></v-text-field>
+                </v-col>
+                <v-col>
+                  <v-text-field v-model="editedItem.creatorName" label="Организатор"></v-text-field>
+                </v-col>
+                <v-col>
+                  <v-text-field v-model="editedItem.shortDate" label="Начало события"></v-text-field>
+                </v-col>
+                <v-col>
+                  <v-text-field v-model="editedItem.site" label="Площадка"></v-text-field>
+                </v-col>
               </v-container>
             </v-card-text>
 
@@ -65,6 +64,7 @@
 
 <script>
   import { mapGetters } from "vuex";
+  import moment from 'moment';
 
   export default {
     data: () => ({
@@ -117,7 +117,8 @@
 
     methods: {
       initialize () {
-        this.allEvents = this.events.map(obj => Object.assign(obj, {"shortDate": obj.eventStartTime.substring(0,10)}));
+        this.allEvents = this.events
+          .map(obj => Object.assign(obj, {"shortDate": moment(obj.eventStartTime).format('DD.MM.YYYY HH:mm')}));
       },
 
       editItem (item) {
@@ -125,12 +126,6 @@
         this.editedItem = Object.assign({}, item)
         this.dialog = true
       },
-
-      // formatDate (date) {
-      //   if (!date) return null
-      //   const [year, month, day] = date.substring(0,10).split('-')
-      //   return `${month}/${day}/${year}`
-      // },
 
       close () {
         this.dialog = false
@@ -149,6 +144,10 @@
         }
         this.close()
       },
+
+      select (event) {
+        this.$router.push({name: 'SelectedEvent', params: { id : event.id}});
+      }
     },
   }
 </script>

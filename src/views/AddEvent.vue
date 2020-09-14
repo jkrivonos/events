@@ -118,6 +118,7 @@
       dense
       text
       type="success"
+      class="mt-3"
     >
       Событие успешно добавлено
     </v-alert>
@@ -202,7 +203,7 @@
               this.isSuccess = false;
               this.isFailed = true;
               setTimeout(() => this.isFailed = false, 3000)
-              console.warn(`Не удалось добавить мероприятие ${ error }`)
+              console.warn(`Не удалось создать мероприятие ${ error }`)
             })
           ;
         }

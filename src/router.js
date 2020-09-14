@@ -2,7 +2,7 @@ import Vue    from 'vue'
 import Router from 'vue-router'
 
 
-import Home          from './views/Home'
+// import Home          from './views/Home'
 import Events        from './views/Events';
 import Login         from './views/Login'
 import Registration  from './views/Registration'
@@ -16,8 +16,8 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'Home',
-      component: Home,
+      name: 'Login',
+      component: Login,
     },
     // {
     //   path:'/category/:id/sub/:id_subcategory',
@@ -41,11 +41,11 @@ export default new Router({
       name: 'AddEvent',
       component: AddEvent
     },
-    {
-      path: '/login',
-      name: 'Login',
-      component: Login,
-    },
+    // {
+    //   path: '/login',
+    //   name: 'Login',
+    //   component: Login,
+    // },
     {
       path: '/registration',
       name: 'Registration',
